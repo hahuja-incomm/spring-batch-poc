@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bootiful-job-sample2
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: bootiful-job
+          image: bootiful-job:latest
+          imagePullPolicy: Never
+          args: ["fileName=https://raw.githubusercontent.com/benas/spring-batch-lab/master/blog/spring-batch-kubernetes/data/sample2.csv"]
+          env:
+            - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+              value: com.mysql.cj.jdbc.Driver
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql/test
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db.username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db.password
