@@ -1,16 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: bootiful-job-sample2
+  name: sbatch-poc-sample2
 spec:
   template:
     spec:
       restartPolicy: OnFailure
       containers:
-        - name: bootiful-job
-          image: bootiful-job:latest
+        - name: sbatch-poc
+          image: sbatch-poc:latest
           imagePullPolicy: Never
-          args: ["fileName=https://raw.githubusercontent.com/benas/spring-batch-lab/master/blog/spring-batch-kubernetes/data/sample2.csv"]
+          args: ["fileName=https://github.com/hahuja12/spring-batch-demo/blob/master/sample-data1.csv?raw=true"]
           env:
             - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
               value: com.mysql.cj.jdbc.Driver
