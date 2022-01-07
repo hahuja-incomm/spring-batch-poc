@@ -3,11 +3,11 @@
 CREATE TABLE PEOPLE  (
                          ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          cc_number BIGINT,
-    			 first_name VARCHAR(20),
-    			 last_name VARCHAR(20),
-    			 balance DOUBLE,
-    			 due_date VARCHAR(20),
-    			 card_status VARCHAR(10)
+    			         first_name VARCHAR(20),
+    			         last_name VARCHAR(20),
+    			         balance DOUBLE,
+    			         due_date VARCHAR(20),
+    			         card_status VARCHAR(10)
 ) ENGINE=InnoDB; 
 
 CREATE TABLE BATCH_JOB_INSTANCE  (

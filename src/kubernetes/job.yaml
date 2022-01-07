@@ -1,16 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: sbatch-poc-sample2
+  name: sbatch-poc-$JOB_NAME
 spec:
   template:
     spec:
       restartPolicy: OnFailure
       containers:
         - name: sbatch-poc
-          image: sbatch-poc:latest
+          image: hahuja12/sbatch-poc:latest
           imagePullPolicy: Never
-          args: ["fileName=https://github.com/hahuja12/spring-batch-demo/blob/master/sample-data1.csv?raw=true"]
+          args: ["fileName=$FILE_NAME"]
           env:
             - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
               value: com.mysql.cj.jdbc.Driver
