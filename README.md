@@ -6,6 +6,9 @@ mvn spring-boot:build-image -Dspring-boot.build-image.imageName=hahuja12/sbatch-
 
 **Setup mysql**
 docker-compose -f src/docker/docker-compose.yml up
+docker exec -it mysql bash
+mysql -u root -p test
+select * from PEOPLE;
 
 **Run application on docker**
 docker run -e SPRING_DATASOURCE_URL=jdbc:mysql://192.168.86.28:3306/test -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=root -e SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.cj.jdbc.Driver hahuja12/sbatch-poc:latest fileName=https://github.com/hahuja12/spring-batch-demo/blob/master/sample-data1.csv?raw=true
@@ -30,5 +33,10 @@ kubectl get pods
 kubectl logs <name-of-pod>
 
 
+**Create AWS RDS mysql Server**
+sbatchpoc.ceaite6u4xnj.us-east-1.rds.amazonaws.com:3306
+
+**Expose Mysql as a service on EKS**
+kubectl apply -f src/kubernetes/database-service-aws.yaml
 
 ```
