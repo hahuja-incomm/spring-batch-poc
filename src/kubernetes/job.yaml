@@ -15,7 +15,7 @@ spec:
             - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
               value: com.mysql.cj.jdbc.Driver
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://sbatchpoc.ceaite6u4xnj.us-east-1.rds.amazonaws.com/test
+              value: jdbc:mysql://mysql/test
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
