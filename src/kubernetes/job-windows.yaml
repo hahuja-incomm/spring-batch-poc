@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sbatch-poc-sample1
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: sbatch-poc
+          image: docker.io/hahuja12/sbatch-poc:latest
+          #imagePullPolicy: Never
+          args: ["fileName=https://github.com/hahuja12/spring-batch-demo/blob/master/sample-data1.csv?raw=true"]
+          env:
+            - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+              value: com.mysql.cj.jdbc.Driver
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql/test
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db.username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db.password

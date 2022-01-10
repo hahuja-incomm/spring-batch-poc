@@ -12,6 +12,7 @@ public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 	@Override
 	public Person process(final Person person) throws Exception {
 		String status ="";
+		Thread.sleep(5000);
 		if(person.getBalance()> 499){
 			 status = "yes";
 		}else{
