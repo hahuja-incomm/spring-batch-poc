@@ -64,13 +64,16 @@ Step 4: Create AWS EKS cluster, any of below options can be used
 
 Step 5: Create AWS RDS Database, any of the below option can be used
         1. Using AWS console (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)
-        2. Using AWS CLI (https://dev.to/bensooraj/accessing-amazon-rds-from-aws-eks-2pc3)
+        2. Using cloudformation template src/kubernetes/rds-mysql-template.yaml
+        3. Using AWS CLI (https://dev.to/bensooraj/accessing-amazon-rds-from-aws-eks-2pc3)
 
-Step 6: Connect EKS with RDS which are hosted in different VPC
+Step 6: Connect MySQL workbench to RDS DB and exceute DDL script in /src/sql/database.sql to create test  database with Spring batch related tables and PEOPLE table where we will insert data after processing each record in input file.
+
+Step 7: Connect EKS with RDS which are hosted in different VPC
         VPC peering and updating Route table and Security
         Follow Step 4. Let's build the bridge! in blog (https://dev.to/bensooraj/accessing-amazon-rds-from-aws-eks-2pc3)
 
-Step 7: Expose RDS MySql as Kubernetes Service, 
+Step 8: Expose RDS MySql as Kubernetes Service, 
         
         *Make sure Kubectl is pointing to EKS cluster by updating kubeconfig (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
         
@@ -78,7 +81,7 @@ Step 7: Expose RDS MySql as Kubernetes Service,
         
         kubectl apply -f src/kubernetes/database-service-aws.yaml         
 
-Step 8: Executing Spring Batch job on EKS
+Step 9: Executing Spring Batch job on EKS
         
         *Make sure to update Docker image URL to your image URL in job.yaml or job-windows.yaml. Line 11 image: in .yaml file
 
@@ -95,6 +98,9 @@ Step 8: Executing Spring Batch job on EKS
 
 ```
 General commands
+
+Optional Step:
+Download any MySQL client e.g. MySQL Workbench (https://dev.mysql.com/downloads/workbench/) to connect to MySQL hosted on local docker or RDS, to query People table.
 
 **Check K8s job**
 kubectl get jobs
